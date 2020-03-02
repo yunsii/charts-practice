@@ -1,3 +1,3 @@
-# React Antd Storybook
+# bizcharts-practice
 
-🛠 Storybook of react and antd.
+🎨 bizcharts say hi.
