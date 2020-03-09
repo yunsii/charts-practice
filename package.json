@@ -19,6 +19,7 @@
   "dependencies": {
     "antd": "^3.26.0",
     "bizcharts": "^3.5.7",
+    "bizcharts-plot": "^2.0.9",
     "react": "^16.11.0"
   },
   "devDependencies": {
