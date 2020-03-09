@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'antd';
 
 export interface LinkProps {
-  href: string;
+  href?: string;
   title: string;
   children: React.ReactNode;
 }
@@ -12,7 +12,7 @@ export default (props: LinkProps) => {
 
   return (
     <Card
-      title={<a href={href} target="_blank">{title}</a>}
+      title={href ? <a href={href} target="_blank">{title}</a> : title}
       style={{ margin: "24px 48px 0" }}
       bodyStyle={{ display: "flex", justifyContent: "center" }}
     >
