@@ -1,7 +1,7 @@
 import React from 'react';
 import { Chart, Geom, Axis, Tooltip, Legend } from 'bizcharts';
 
-import { LinkCard } from '../../components';
+import { LinkCard } from '../../../components';
 
 const data = [
   { genre: 'Sports', sold: 275, income: 2300 },

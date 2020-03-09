@@ -2,7 +2,7 @@ import React from 'react';
 import { HelloWorld } from '../src';
 
 export default {
-  title: 'Hello',
+  title: 'bizcharts',
 };
 
 export const hello = () => <HelloWorld />;
