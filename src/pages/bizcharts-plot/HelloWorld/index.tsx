@@ -25,10 +25,8 @@ export default () => {
         data={data}
         xField="sold"
         yField="genre"
-        scale={{
-          sold: { alias: '销售量' },
-          genre: { alias: '游戏种类' },
-        }}
+        // scale={cols}  // no this prop
+        color="genre"
       />
     </LinkCard>
   )
