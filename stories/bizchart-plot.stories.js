@@ -5,7 +5,7 @@ import {
 } from '../src';
 
 export default {
-  title: 'bizcharts-plots',
+  title: 'bizcharts-plot',
 };
 
 export const hello = () => <PlotBarChart />;
