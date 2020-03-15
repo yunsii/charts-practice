@@ -4,7 +4,7 @@ import { LinkCard } from '../../../components';
 import GaugeChart from '../../../components/GaugeChart';
 
 export default () => {
-  const cols = {
+  const scale = {
     value: {
       min: 0,
       max: 9,
@@ -20,6 +20,7 @@ export default () => {
     >
       <GaugeChart
         value={5.6}
+        scale={scale}
       />
     </LinkCard>
   )
