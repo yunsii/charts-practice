@@ -1,25 +1,24 @@
 import React, { } from 'react';
 import { Chart, Axis, Coord, Geom, Guide, Shape } from 'bizcharts';
 
-const { Html, Arc } = Guide;
+import autoHeight from '../autoHeight';
 
 (Shape as any).registerShape('point', 'pointer', {
   drawShape(cfg, group) {
-    let point = cfg.points[0]; // 获取第一个标记点
-    point = this.parsePoint(point);
-    const center = this.parsePoint({ // 获取极坐标系下画布中心点
+    let point = cfg.points[0];
+    point = (this as any).parsePoint(point);
+    const center = (this as any).parsePoint({
       x: 0,
       y: 0,
     });
-    // 绘制指针
     group.addShape('line', {
       attrs: {
         x1: center.x,
         y1: center.y,
         x2: point.x,
-        y2: point.y - 20,
+        y2: point.y,
         stroke: cfg.color,
-        lineWidth: 5,
+        lineWidth: 2,
         lineCap: 'round',
       },
     });
@@ -27,9 +26,9 @@ const { Html, Arc } = Guide;
       attrs: {
         x: center.x,
         y: center.y,
-        r: 12,
+        r: 6,
         stroke: cfg.color,
-        lineWidth: 4.5,
+        lineWidth: 3,
         fill: '#fff',
       },
     });
@@ -46,73 +45,90 @@ const defaultScale = {
 }
 
 export interface GaugeProps {
+  height?: number;
   label?: string;
   value?: number;
   scale?: any;
+  /**
+   * html 中内联样式
+   */
+  labelColor?: string;
+  valueColor?: string;
 }
 
-export const Gauge: React.FC<GaugeProps> = (props) => {
-  const { label, value = 0, scale } = props;
+const Gauge: React.FC<GaugeProps> = (props) => {
+  const {
+    label,
+    value = 0,
+    scale = defaultScale,
+    height = 1,
+    labelColor = "rgba(0,0,0,0.43)",
+    valueColor = "rgba(0,0,0,0.85)",
+  } = props;
 
-  const labelHtml = label && `<p style="font-size:1.75em; color:rgba(0,0,0,0.43); margin: 0;">${label}</p>`;
+  const labelHtml = label ? `<p style="font-size:14px; color:${labelColor}; margin: 0;">${label}</p>` : "";
 
   const valueHtml = `
     <div style="width:300px; text-align:center; font-size:12px!important;">
-      ${labelHtml || ""}
-      <p style="font-size:3em; color:rgba(0,0,0,0.85); margin: 0;"}}>
+      ${labelHtml}
+      <p style="font-size:24px; color:${valueColor}; margin: 0;"}}>
         ${value}
       </p>
     </div>
 `;
 
+  const maxValue = scale.value.max;
+  console.log("gauge", value, maxValue, value / maxValue * 10);
+
   return (
-    <Chart height={600} data={[{ value }]} scale={scale || defaultScale} padding={[0, 0, 200, 0]} forceFit>
-      <Coord type="polar" startAngle={-9 / 8 * Math.PI} endAngle={1 / 8 * Math.PI} radius={0.75} />
+    <Chart height={height} data={[{ value }]} scale={scale} padding={[-16, 0, 16, 0]} forceFit>
+      <Coord type="polar" startAngle={-1.25 * Math.PI} endAngle={0.25 * Math.PI} radius={0.8} />
       <Axis
         name="value"
         zIndex={2}
         line={null}
+        subTickCount={4}
         label={{
-          offset: -16,
+          offset: -14,
           textStyle: {
-            fontSize: 18,
+            fontSize: 14,
             textAlign: 'center',
             textBaseline: 'middle',
           },
         }}
-        subTickCount={4}
         subTickLine={{
           length: -8,
           stroke: '#fff',
-          strokeOpacity: 1,
+          strokeOpacity: 1
         }}
         tickLine={{
-          length: -18,
+          length: -17,
           stroke: '#fff',
-          strokeOpacity: 1,
+          strokeOpacity: 1
         }}
+        grid={null}
       />
-      <Axis name="1" visible={false} />
+      <Axis name="1" line={null} />
       <Guide>
-        <Arc
-          // zIndex={0}
+        <Guide.Arc
+          zIndex={0}
           start={[0, 0.965]}
-          end={[9, 0.965]}
+          end={[maxValue, 0.965]}
           style={{ // 底灰色
             stroke: '#CBCBCB',
-            lineWidth: 18,
+            lineWidth: 10,
           }}
         />
-        <Arc
-          // zIndex={1}
+        <Guide.Arc
+          zIndex={1}
           start={[0, 0.965]}
           end={[value, 0.965]}
           style={{
             stroke: '#1890FF',
-            lineWidth: 18,
+            lineWidth: 10,
           }}
         />
-        <Html
+        <Guide.Html
           position={['50%', '95%']}
           html={valueHtml}
         />
@@ -129,4 +145,4 @@ export const Gauge: React.FC<GaugeProps> = (props) => {
   );
 }
 
-export default Gauge;
+export default autoHeight()(Gauge);
