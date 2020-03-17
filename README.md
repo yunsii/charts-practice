@@ -1,3 +1,3 @@
-# bizcharts-practice
+# charts-practice
 
-🎨 bizcharts say hi.
+🎨 charts say hi.
