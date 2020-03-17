@@ -1,20 +1,20 @@
 import React from 'react';
 import {
-  PlotBarChart,
-  PlotGaugeChart,
-} from '../src';
+  BarChart,
+  GaugeChart,
+} from '../src/pages/bizcharts-plot';
 
 export default {
   title: 'bizcharts-plot',
 };
 
-export const hello = () => <PlotBarChart />;
+export const barChart = () => <BarChart />;
 
-hello.story = {
-  name: 'Hello World',
+barChart.story = {
+  name: 'Bar Chart',
 };
 
-export const gaugeChart = () => <PlotGaugeChart />;
+export const gaugeChart = () => <GaugeChart />;
 
 gaugeChart.story = {
   name: 'Gauge Chart',
