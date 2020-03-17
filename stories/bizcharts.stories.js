@@ -1,17 +1,17 @@
 import React from 'react';
 import {
-  HelloWorld,
+  BarChart,
   GaugeChart,
-} from '../src';
+} from '../src/pages/bizcharts';
 
 export default {
   title: 'bizcharts',
 };
 
-export const hello = () => <HelloWorld />;
+export const barChart = () => <BarChart />;
 
-hello.story = {
-  name: 'Hello World',
+barChart.story = {
+  name: 'Bar Chart',
 };
 
 export const gaugeChart = () => <GaugeChart />;

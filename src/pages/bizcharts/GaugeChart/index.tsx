@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { LinkCard } from '../../../components';
-import GaugeChart from '../../../components/GaugeChart';
+import GaugeChart from '../../../components/bizcharts/GaugeChart';
 
 export default () => {
   const scale = {
@@ -21,6 +21,7 @@ export default () => {
       <GaugeChart
         value={5.6}
         scale={scale}
+        height={240}
       />
     </LinkCard>
   )

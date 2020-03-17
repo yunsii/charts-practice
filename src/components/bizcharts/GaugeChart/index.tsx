@@ -111,7 +111,7 @@ const Gauge: React.FC<GaugeProps> = (props) => {
       <Axis name="1" line={null} />
       <Guide>
         <Guide.Arc
-          zIndex={0}
+          // zIndex={0}
           start={[0, 0.965]}
           end={[maxValue, 0.965]}
           style={{ // 底灰色
@@ -120,7 +120,7 @@ const Gauge: React.FC<GaugeProps> = (props) => {
           }}
         />
         <Guide.Arc
-          zIndex={1}
+          // zIndex={1}
           start={[0, 0.965]}
           end={[value, 0.965]}
           style={{
